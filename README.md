@@ -41,6 +41,11 @@ brief / URL / imagen
 | `/qa` | Checklist de producción + anti-IA sobre el proyecto actual |
 | `/mateo-sync` | Actualiza las skills vendored desde sus repos de origen |
 
+## Mantener y contribuir
+
+- **[MAINTAINING.md](./MAINTAINING.md)** — cómo editar, actualizar skills, versionar y publicar.
+- **[CHANGELOG.md](./CHANGELOG.md)** — historial de versiones.
+
 ## Créditos
 
 Las skills de diseño de terceros vendored en `skills-lib/` pertenecen a sus autores
