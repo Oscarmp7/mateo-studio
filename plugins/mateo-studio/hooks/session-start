@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# SessionStart hook for the mateo-studio plugin.
+#
+# Its ONLY job: write the plugin's absolute install path to a known location so
+# that the `mateo` skill and the 6 agents can resolve where their playbook and
+# vendored skills live (paths vary per machine; ${CLAUDE_PLUGIN_ROOT} is only
+# expanded in hooks/.mcp.json, not inside skill/agent markdown bodies).
+#
+# It does NOT inject any identity or context into the prompt. This is the key
+# difference from the old "webcraft" plugin, whose SessionStart hook hijacked
+# every session by turning Claude into "Mateo" globally.
+
+set -euo pipefail
+
+# The script lives at PLUGIN_ROOT/hooks/session-start → derive PLUGIN_ROOT.
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
+PLUGIN_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+CLAUDE_DIR="${HOME}/.claude"
+mkdir -p "${CLAUDE_DIR}" 2>/dev/null || true
+printf '%s\n' "${PLUGIN_ROOT}" > "${CLAUDE_DIR}/.mateo-studio-root" 2>/dev/null || true
+
+# No stdout context injection. Exit clean.
+exit 0

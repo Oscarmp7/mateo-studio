@@ -1,0 +1,20 @@
+{
+  "name": "mateo-studio",
+  "description": "Oscar's multi-agent frontend design studio — orchestrator + 6 specialist agents, vendored design skills, and bundled MCPs. From brief/URL/image to production-ready, non-AI-looking frontend.",
+  "owner": {
+    "name": "Oscar Matos"
+  },
+  "plugins": [
+    {
+      "name": "mateo-studio",
+      "source": "./plugins/mateo-studio",
+      "description": "Director Mateo + strategist, ux-architect, art-director, frontend-architect, sofia (builder) and qa-reviewer. Phase-gated workflow with vendored skills and self-configuring MCPs.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Oscar Matos"
+      },
+      "category": "design",
+      "keywords": ["frontend", "design-system", "mateo", "studio", "multi-agent", "ui-ux", "anti-ai-slop", "gsap", "tailwind", "clone"]
+    }
+  ]
+}

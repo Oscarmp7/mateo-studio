@@ -1,0 +1,16 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs / temp
+*.log
+*.tmp
+.cache/
+
+# Node (si alguna skill trae scripts con deps)
+node_modules/
+
+# Artefactos de prueba de proyectos generados
+.refs/
+.playwright-mcp/

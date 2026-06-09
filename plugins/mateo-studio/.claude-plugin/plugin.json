@@ -1,0 +1,9 @@
+{
+  "name": "mateo-studio",
+  "description": "Multi-agent frontend design studio. Director 'Mateo' orchestrates 6 specialist agents (strategist, ux-architect, art-director, frontend-architect, sofia/builder, qa-reviewer) through a phase-gated workflow, with vendored design skills and bundled MCPs. Delivers production-ready frontend that does NOT look AI-generated.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Oscar Matos"
+  },
+  "keywords": ["frontend", "design-system", "mateo", "studio", "multi-agent", "ui-ux", "anti-ai-slop", "gsap", "tailwind", "nextjs", "clone"]
+}
