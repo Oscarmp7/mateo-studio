@@ -13,4 +13,5 @@ Sigue el protocolo de fidelidad visual del playbook (§3A):
    qa-reviewer hace visual-diff hasta calcar).
 4. Respeta los gates de aprobación con el usuario.
 
-Si no tienes el MCP `playwright` activo, avísale al usuario cómo activarlo antes de seguir.
+Si no tienes el MCP `playwright` activo, NO sigas a ciegas: dile al usuario que corra
+`/mateo-init` (verifica y configura el entorno) y reinicie la sesión.

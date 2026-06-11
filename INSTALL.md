@@ -29,8 +29,12 @@ Luego **reinicia la sesión** (los MCPs y el hook cargan al inicio). Verifica co
 /mateo
 ```
 
-Debe arrancar el director del studio. Si ves `/clone`, `/qa`, `/design-system` y
-`/mateo-sync` al escribir `/`, quedó bien instalado.
+Debe arrancar el director del studio. Si ves los comandos `/mateo-*` (`/mateo-init`,
+`/mateo-clone`, `/mateo-qa`, `/mateo-design-system`, `/mateo-status`, `/mateo-sync`)
+al escribir `/`, quedó bien instalado.
+
+**Primer paso recomendado:** corre `/mateo-init` — verifica Node, MCPs, keys y skills,
+y te deja la lista exacta de lo que falte.
 
 ---
 
@@ -81,8 +85,12 @@ autores:
 ## Cómo se usa
 
 - `/mateo` — arranca el flujo completo (brief, URL o imagen → web production-ready).
-- `/clone <url>` — clona y mejora una web al pie de la letra.
-- `/design-system` — genera solo la dirección de arte + design system.
-- `/qa` — corre el checklist de producción + anti-IA sobre el proyecto actual.
+  También maneja iteraciones sobre proyectos entregados y adopción de proyectos
+  existentes (incluidos programas desktop — pregunta el modo antes de tocar código).
+- `/mateo-init` — verifica e instala lo que el studio necesita (correr al instalar).
+- `/mateo-clone <url>` — clona y mejora una web al pie de la letra.
+- `/mateo-design-system` — genera solo la dirección de arte + design system.
+- `/mateo-qa` — corre el checklist de producción + anti-IA sobre el proyecto actual.
+- `/mateo-status` — resume en qué quedó el proyecto para retomarlo sin perder contexto.
 
 Mateo conversa en español y entrega código (en inglés) que **no parece hecho por IA**.

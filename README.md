@@ -36,9 +36,11 @@ brief / URL / imagen
 | Comando | Qué hace |
 |---------|----------|
 | `/mateo` | Flujo completo desde un brief, URL o imagen |
-| `/clone <url>` | Clona y mejora una web al pie de la letra |
-| `/design-system` | Solo la dirección de arte + design system |
-| `/qa` | Checklist de producción + anti-IA sobre el proyecto actual |
+| `/mateo-init` | Verifica e instala lo que el studio necesita en esta máquina (correr primero) |
+| `/mateo-clone <url>` | Clona y mejora una web al pie de la letra |
+| `/mateo-design-system` | Solo la dirección de arte + design system |
+| `/mateo-qa` | Checklist de producción + anti-IA sobre el proyecto actual |
+| `/mateo-status` | Resume en qué quedó el proyecto: decisiones, avance y qué sigue |
 | `/mateo-sync` | Actualiza las skills vendored desde sus repos de origen |
 
 ## Mantener y contribuir

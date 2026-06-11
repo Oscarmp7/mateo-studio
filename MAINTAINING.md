@@ -17,7 +17,7 @@ mateo-studio/                              ← el repo ES el marketplace
     ├── studio/playbook.md                  ← estándar compartido (anti-IA, checklist, MCPs, índice skills)
     ├── skills-lib/                         ← skills de terceros VENDORED (el motor de diseño)
     ├── .mcp.json                           ← MCPs que el plugin auto-declara
-    ├── commands/*.md                       ← atajos /clone /qa /design-system /mateo-sync
+    ├── commands/*.md                       ← comandos /mateo-* (init, clone, qa, design-system, status, sync)
     ├── hooks/                              ← session-start (escribe la ruta) + run-hook.cmd
     └── scripts/sync-skills.sh              ← refresca skills-lib desde sus repos
 ```
