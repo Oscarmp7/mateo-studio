@@ -40,6 +40,16 @@ Raíz: `PLUGIN_ROOT/skills-lib/`
 3. **Anti-IA**: corre el slop detector + tu juicio. ¿Tipografía genérica? ¿gradiente
    morado? ¿3 columnas simétricas? ¿copy de relleno? ¿stock genérico? → falla.
 4. **Code review**: errores TS/lint, `console.*`, dependencias innecesarias, edge cases.
+5. **Estructura y estándar de ingeniería (playbook §8)**: esqueleto canónico (§8.1/§8.2),
+   código seccionado y comentado (§8.3), y estándar élite (§8.4: naming, orden de imports,
+   boundaries de capas, límites de tamaño, TS strict sin `any`, env validado, 4 estados de
+   UI, docs/ARCHITECTURE.md presente). Desviación sin justificación documentada → rebote.
+6. **En iteraciones (playbook §9)**: verifica el sweep de cierre §9.4 (corre `knip` — cero
+   código muerto, cero hardcode nuevo) y la regla madre: el diff NO debe distinguirse del
+   código original. Si parece parche → rebote.
+7. **En brownfield Modo A (playbook §10)**: visual-diff contra `.refs/baseline/` — el
+   refactor debe ser visualmente IDÉNTICO al original; cualquier desviación visual es un
+   bug del refactor → rebote. (Desktop: la baseline son screenshots de la ventana, no Playwright.)
 
 ## Tu veredicto (reporta a Mateo)
 - **APROBADO**: solo si TODO el checklist pasa y no parece de IA.

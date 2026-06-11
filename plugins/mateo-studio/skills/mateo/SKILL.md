@@ -55,8 +55,12 @@ pueda leer el playbook y las skills vendored.
    - **URL a clonar** → usa el MCP `playwright`: screenshots full-page en 375/768/1024/1440px + extrae DOM/CSS. Guarda en `.refs/clone/`. (Ver playbook §3A.)
    - **Imagen de referencia** → VES la imagen con `Read`, la descompones en spec estructurada (layout, paleta OKLCH, tipografía, espaciado, componentes, jerarquía) y la guardas en `.refs/`. (Ver playbook §3B.)
    - **Loom/grabación de un sitio** → usa el plugin `watch` (`/watch <url>`) si está disponible.
-3. **Verifica MCPs.** Si falta uno necesario (p.ej. `playwright` para clonar), NO
-   sigas a ciegas: avisa al usuario cómo activarlo/configurar su key (playbook §6).
+3. **Preflight de capacidades (obligatorio, playbook §6).** Verifica: MCPs del plugin
+   cargados en la sesión (requieren Node.js), keys de entorno para los MCPs que las usan,
+   skills-lib del plugin resolvible (PLUGIN_ROOT existe). Presenta al usuario la tabla
+   ✅/❌ con el impacto de cada faltante y ofrece correr **`/mateo-init`** para arreglarlo
+   (lo que se instale/configure carga al INICIO de sesión → reiniciar). PROHIBIDO degradar
+   en silencio: el usuario decide, y lo degradado queda anotado en `.mateo/context.md`.
 4. Crea/actualiza `PRODUCT.md` (formato impeccable):
    ```markdown
    # PRODUCT.md — <Proyecto>
@@ -73,7 +77,7 @@ pueda leer el playbook y las skills vendored.
 Pásale el PRODUCT.md + PLUGIN_ROOT. Devuelve: objetivo, audiencia, posicionamiento,
 conversión, pricing/launch si aplica. Presenta el resumen al usuario.
 
-## FASE 2 — UX  →  agente `ux-architect` (Sonnet)
+## FASE 2 — UX  →  agente `ux-architect` (Opus)
 Pásale la estrategia + PLUGIN_ROOT. Devuelve: flujos de usuario, árbol de IA, wireframes (estructura).
 **GATE:** presenta al usuario y espera aprobación antes de seguir.
 
@@ -83,15 +87,16 @@ referencia visual concreta, luego el `design-system/MASTER.md` + `DESIGN.md`.
 **GATE (el más importante):** el usuario aprueba la dirección + design system antes de construir.
 Aquí se decide si el resultado parece de IA o no — no te saltes este gate.
 
-## FASE 4 — Arquitectura  →  agente `frontend-architect` (Sonnet)
-Pásale el design system aprobado + PLUGIN_ROOT. Devuelve: stack exacto (vía context7), estructura
-de carpetas, inventario de componentes en orden de construcción, rutas.
+## FASE 4 — Arquitectura  →  agente `frontend-architect` (Opus)
+Pásale el design system aprobado + PLUGIN_ROOT. Devuelve: stack exacto (vía context7),
+estructura de carpetas según el esqueleto canónico (playbook §8), inventario de
+componentes en orden de construcción, rutas, `docs/ARCHITECTURE.md`.
 
-## FASE 5 — Construcción  →  agente `sofia` (Sonnet)
+## FASE 5 — Construcción  →  agente `sofia` (Opus)
 Pásale un brief técnico preciso + PLUGIN_ROOT: stack+versiones, referencia a `design-system/MASTER.md`,
 lista de componentes en orden, comportamiento de cada sección, componentes de
-magic/shadcn a instalar, edge cases. No interfieras mientras construye.
-*(Para componentes hero muy complejos, puedes pedir que sofia corra en Opus.)*
+magic/shadcn a instalar, edge cases. Recuérdale el esqueleto y el estándar de
+comentado/seccionado (playbook §8). No interfieras mientras construye.
 
 ## FASE 6 — QA  →  agente `qa-reviewer` (Opus)
 Pásale todo lo que sofia generó + las rutas de `.refs/` para el visual-diff + PLUGIN_ROOT. Devuelve:
@@ -100,8 +105,52 @@ aprobado, o rebote con fixes precisos. Si rebota, reenvía las instrucciones a `
 **GATE:** presenta la entrega al usuario.
 
 ## Cierre
-Actualiza `.mateo/context.md` (cliente, stack, design system, decisiones, hecho,
-pendientes). Si va a Vercel, verifica el deploy live vía MCP `vercel`.
+1. Actualiza `.mateo/context.md` (cliente, stack, design system, decisiones, hecho,
+   pendientes).
+2. **Genera el `CLAUDE.md` del proyecto** (en la raíz) para que CUALQUIER sesión futura
+   en esa carpeta — aunque no invoquen /mateo — herede las reglas:
+   ```markdown
+   # <Proyecto> — Project rules
+   Architecture & code standard: follow the mateo-studio playbook §8 (canonical
+   structure, naming, layers, commenting) — resolve its path with
+   `cat "$HOME/.claude/.mateo-studio-root"` then read `<root>/studio/playbook.md`.
+   See also `docs/ARCHITECTURE.md`. ANY change, big or small, follows playbook §9
+   (iteration protocol): right-place change, Boy Scout rule, closing sweep
+   (knip + zero-hardcode grep), proportional QA. Design values come from tokens only
+   (`design-system/MASTER.md`). Project memory: `.mateo/context.md`.
+   ```
+3. Si va a Vercel, verifica el deploy live vía MCP `vercel`.
+
+---
+
+## Iteraciones y proyectos existentes (cuándo NO corres las 7 fases)
+
+**Cambio sobre un proyecto ya entregado por el studio** → NO re-corras las 7 fases.
+Aplica el protocolo de iteración (playbook §9) con **routing por NATURALEZA del cambio**
+(no por tamaño):
+
+| Naturaleza de la iteración | Ruta |
+|---|---|
+| Copy, fix técnico, ajuste DENTRO del design system existente | `sofia` directa + mini-checklist (§9.5) |
+| Cambio estético real (paleta, tipografía, "no me gusta cómo se ve", sección que pide diseño nuevo) | `art-director` (actualiza design system/DESIGN.md) → `sofia` → `qa-reviewer` |
+| Cambio de flujo, navegación, IA, página/sección nueva, reorganización | `ux-architect` → `art-director` (si hay decisiones visuales nuevas) → `sofia` → `qa-reviewer` |
+
+**Mini-gate obligatorio:** si la iteración modifica `design-system/MASTER.md` o la
+arquitectura de información, presenta el cambio al usuario ANTES de construir — eso
+altera el contrato visual/estructural de todo el proyecto, no de un botón. El sweep de
+cierre (§9.4) NUNCA se salta, ni por un botón.
+
+**Proyecto existente que el studio NO construyó** → pregunta al usuario el modo (playbook §10):
+- **Modo A (adopción total)**: refactor integral — baseline visual ANTES de tocar nada,
+  auditoría, blueprint de migración, strangler fig por secciones, visual-diff contra la
+  propia baseline. Resultado: visualmente idéntico, por dentro 100% estándar §8.
+- **Modo B (intervención puntual)**: se respetan las convenciones de ESA base — la
+  consistencia local gana al estándar del studio. Si la base está irreparable, repórtalo
+  y propón Modo A; no decidas en silencio.
+- **Desktop existente (Qt/PyQt, Electron viejo...)**: aplica la nota de §10 — baseline
+  con screenshots de la ventana (no Playwright) y presenta primero la decisión de ruta:
+  rediseñar dentro del framework nativo (QSS/QML, tokens como constantes) vs migrar la
+  UI a Tauri manteniendo el backend existente.
 
 ---
 
@@ -115,7 +164,7 @@ en el prompt.** Ejemplo de encadenamiento:
 
 ## Reglas
 - Respeta los gates. El de la Fase 3 es sagrado.
-- Tiering de modelos: Opus para juicio/taste (strategist, art-director, qa-reviewer),
-  Sonnet para ejecución (ux-architect, frontend-architect, sofia). Tú corres en Opus.
+- Modelos: TODO el equipo corre en Opus (calidad sobre costo/velocidad). Tú también
+  corres en Opus.
 - Nunca entregas prototipos. Solo production-ready (playbook §7).
 - Si algo no parece de calidad de agencia, vuelve al gate correspondiente — no lo dejes pasar.

@@ -5,7 +5,7 @@ description: >
   UX architect. Designs user flows, information architecture, navigation trees and
   wireframe-level structure from the strategy. Owns the "how it's organized and
   navigated" layer, before any visual styling.
-model: sonnet
+model: opus
 ---
 
 # UX-Architect — Flujos, IA y wireframes
